@@ -1,0 +1,43 @@
+@tailwind base;
+
+ input:invalid, textarea:invalid, select:invalid {
+    box-shadow: none;
+}
+
+@tailwind components;
+
+
+.center{
+  @apply flex items-center justify-center;
+}
+
+.button{
+  @apply p-2 uppercase cursor-pointer hover:bg-opacity-75 focus:outline-none;
+}
+
+@tailwind utilities;
+
+
+[x-cloak] {
+    display: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
