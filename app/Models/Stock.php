@@ -16,4 +16,13 @@ class Stock extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function getLastRestockedDateAttribute()
+    {
+        return $this->updated_at->format('M d, Y');
+    }
+    public function getLastRestockedTimeAttribute()
+    {
+        return $this->updated_at->format('g:i a');
+    }
 }

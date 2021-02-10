@@ -22,5 +22,9 @@
         "sass": "^1.32",
         "sass-loader": "^8.0",
         "tailwindcss": "^2.0"
+    },
+    "dependencies": {
+        "chartjs": "^0.3.24",
+        "sweetalert2": "^10.14.0"
     }
 }

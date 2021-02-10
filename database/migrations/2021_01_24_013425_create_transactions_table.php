@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->string('code')->nullable()->default(null);
             $table->integer('total_sales')->nullable()->default(null);
             $table->integer('total_discount')->nullable()->default(null);
+            $table->integer('amount_tendered')->nullable()->default(null);
             $table->boolean('is_final')->default(false);
             $table->timestamps();
         });

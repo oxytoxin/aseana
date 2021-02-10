@@ -14,6 +14,7 @@ require("laravel-mix-tailwind");
  */
 
 mix.js("resources/js/app.js", "public/js/app.js")
+    .js("resources/js/sweetalert2.js", "public/js/sweetalert2.js")
     .sass("resources/sass/app.scss", "public/css/app.css")
     .tailwind("./tailwind.config.js")
     .sourceMaps()
@@ -21,7 +22,8 @@ mix.js("resources/js/app.js", "public/js/app.js")
         notify: false,
         proxy: "aseana.test",
         port: 3000
-    });
+    })
+    .version();
 
 if (mix.inProduction()) {
     mix.version();
