@@ -48,7 +48,7 @@
         labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         datasets: [{
             label: 'Weekly Sales',
-            data: [100,200],
+            data: @this.weekly_sales,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
