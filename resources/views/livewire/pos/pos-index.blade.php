@@ -28,7 +28,7 @@
         <div class="text-center">
             <input x-ref="productSearch" type="text" wire:model="query" autofocus placeholder="Search for products..." autocomplete="off" class="w-full rounded-md">
         </div>
-        <div id="products-container" class="mx-auto mt-2 overflow-y-auto bg-gray-300 divide-y-2 divide-gray-500 h-96">
+        <div id="products-container" class="mx-auto mt-2 overflow-y-auto bg-gray-300 divide-y-2 divide-gray-500 h-72">
             <div class="sticky top-0 flex justify-between p-2 font-semibold text-center text-white bg-yellow-600">
                 <div class="w-2/5">
                     <h1>Product</h1>
@@ -77,7 +77,7 @@
         <i class="absolute text-xl text-red-600 cursor-pointer icofont-ui-close top-2 right-2" wire:click="discardTransaction"></i>
         <h1 class="text-xl font-semibold text-center uppercase">Current Sale</h1>
         <div class="flex flex-col justify-between flex-1">
-            <div class="overflow-y-auto bg-white h-72">
+            <div class="h-64 overflow-y-auto bg-white">
                 <table class="w-full text-sm text-center border-2 border-collapse divide-y-2 table-auto">
                     <thead class="text-white">
                         <tr>

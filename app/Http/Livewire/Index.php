@@ -19,11 +19,23 @@ class Index extends Component
 
     public function render()
     {
+        // $this->weekly_sales = Transaction::thisWeek()->get()->groupBy(function ($item) {
+        //     return $item->updated_at->format('l');
+        // })->map(function ($week) {
+        //     return $week->sum('total_sales');
+        // })->flatten()->toArray();
+        function callback()
+        {
+        }
         $this->weekly_sales = Transaction::thisWeek()->get()->groupBy(function ($item) {
-            return $item->updated_at->format('l');
+            return $item->updated_at->format('w');
         })->map(function ($week) {
             return $week->sum('total_sales');
-        })->flatten()->toArray();
+        })->toArray();
+        $final = array_fill(0, 7, 0);
+        $this->weekly_sales = array_map(function ($k, $e) {
+            return array_key_exists($k, $this->weekly_sales) ? $this->weekly_sales[$k] : $e;
+        }, array_keys($final), $final);
         $popular = Transaction::get()->pluck('products')->flatten()->groupBy('name')->map(function ($item) {
             return ['quantity' => $item->sum('pivot.quantity')];
         })->sortByDesc('quantity')->take(5);
