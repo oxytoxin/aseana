@@ -19,14 +19,6 @@ class Index extends Component
 
     public function render()
     {
-        // $this->weekly_sales = Transaction::thisWeek()->get()->groupBy(function ($item) {
-        //     return $item->updated_at->format('l');
-        // })->map(function ($week) {
-        //     return $week->sum('total_sales');
-        // })->flatten()->toArray();
-        function callback()
-        {
-        }
         $this->weekly_sales = Transaction::thisWeek()->get()->groupBy(function ($item) {
             return $item->updated_at->format('w');
         })->map(function ($week) {
