@@ -111,6 +111,14 @@ class PosIndex extends Component
         $this->sweetAlert('success', 'Product added to sale!', '', 'bottom-end', 1200);
     }
 
+    public function cancelAddToSale()
+    {
+        $this->selected_product = null;
+        $this->selected_quantity = 1;
+        $this->selected_price = 0;
+        $this->discount = 5;
+    }
+
     public function applyDiscount()
     {
         if ($this->discount < 0 || $this->discount > 100) return $this->sweetAlert('error', 'Invalid discount.', 'Must be between 0 and 100');

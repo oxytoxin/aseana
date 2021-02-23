@@ -23,7 +23,7 @@ class InventoryIndex extends Component
     {
         $products = Product::query();
         if ($this->search) $products = $products->where('name', 'like', "%$this->search%");
-        $products = $products->with(['unit', 'stock'])->get()->sortBy('stock.quantity');
+        $products = $products->with(['unit', 'stock'])->withLastRestock()->get()->sortBy('stock.quantity');
         return view('livewire.inventory.inventory-index', [
             'products' => $products,
         ])
@@ -59,6 +59,9 @@ class InventoryIndex extends Component
             'restock' => 'required|numeric|min:0',
         ]);
         $this->product->stock->update(['quantity' => $this->product->stock->quantity + $this->restock]);
+        $this->product->restocks()->create([
+            'quantity' => $this->restock,
+        ]);
         $this->showRestock = false;
         $this->restock = '';
         $this->alert('success', 'Stocks updated.');

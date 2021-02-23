@@ -11,6 +11,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $dates = ['last_restock'];
 
     public function stock()
     {
@@ -45,5 +46,15 @@ class Product extends Model
         return $query->whereHas('stock', function (Builder $q) {
             $q->whereColumn('quantity', '<', 'warning');
         });
+    }
+
+    public function restocks()
+    {
+        return $this->hasMany(Restock::class);
+    }
+
+    public function scopeWithLastRestock($query)
+    {
+        return $query->addSelect(['last_restock' => Restock::select('created_at')->whereColumn('product_id', 'products.id')->orderByDesc('created_at')->limit(1)]);
     }
 }

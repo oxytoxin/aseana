@@ -25,7 +25,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
-<body class="h-screen text-gray-800 bg-gray-200">
+<body class="h-screen text-gray-800 bg-red-100">
     <div class="grid h-full p-3 grid-rows-8">
         <header class="flex justify-center row-span-1">
             <a href="{{ route('home') }}">

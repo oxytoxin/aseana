@@ -1,6 +1,7 @@
 <div class="grid h-full grid-cols-12" x-data="{ createModal : @entangle('showCreate').defer }" x-init="console.log(123)">
     <div x-show.transition.opacity="createModal" x-cloak class="fixed inset-0 z-50 grid bg-gray-200 bg-opacity-50 place-items-center">
-        <div @click.away="createModal = false" class="w-1/2 p-5 space-y-5 bg-white">
+        <div @click.away="createModal = false" class="relative w-1/2 p-5 space-y-5 bg-white">
+            <i class="absolute text-red-600 cursor-pointer icofont-ui-close right-6" @click="createModal = false"></i>
             <h1 class="font-semibold text-center">ADD A NEW PRODUCT</h1>
             <form wire:submit.prevent="addProduct" class="space-y-3">
                 <div>
@@ -37,16 +38,16 @@
             </form>
         </div>
     </div>
-    <div class="col-span-2 p-5 bg-gray-400">
+    <div class="col-span-2 p-5 bg-red-400">
         <div class="flex flex-col h-full">
             <ul class="flex flex-col flex-grow space-y-3 font-semibold uppercase">
-                <a class="p-2 duration-200 rounded {{ session('page') == 'products.index' ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white" href="{{ route('products.index') }}">
+                <a class="p-2 duration-200 rounded {{ session('page') == 'products.index' ? 'bg-red-700 text-white' : '' }} hover:bg-red-700 hover:text-white" href="{{ route('products.index') }}">
                     <li>Products</li>
                 </a>
-                <a class="p-2 duration-200 rounded {{ session('page') == 'inventory.index' ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white" href="{{ route('inventory.index') }}">
+                <a class="p-2 duration-200 rounded {{ session('page') == 'inventory.index' ? 'bg-red-700 text-white' : '' }} hover:bg-red-700 hover:text-white" href="{{ route('inventory.index') }}">
                     <li>Inventory</li>
                 </a>
-                <a class="p-2 duration-200 rounded {{ session('page') == 'reports.index' ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white" href="{{ route('reports.index') }}">
+                <a class="p-2 duration-200 rounded {{ session('page') == 'reports.index' ? 'bg-red-700 text-white' : '' }} hover:bg-red-700 hover:text-white" href="{{ route('reports.index') }}">
                     <li>Reports</li>
                 </a>
             </ul>
@@ -56,20 +57,20 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-col col-span-10 bg-gray-300">
+    <div class="flex flex-col col-span-10 bg-red-200">
         <div class="flex justify-between px-5 py-2">
             <input wire:model="search" autofocus autocomplete="off" placeholder="Search for product..." class="w-1/2 rounded" type="text">
             <button @click="createModal = true; $nextTick(()=>{$refs.product_name.focus();});" class="px-3 py-2 bg-green-400 rounded hover:bg-opacity-50">ADD PRODUCT</button>
         </div>
         <div class="flex-grow w-full h-0 px-5 overflow-y-auto">
-            <table class="table w-full text-center table-auto">
+            <table class="table w-full text-sm text-center table-auto">
                 <thead class="text-white">
                     <tr>
-                        <th class="sticky top-0 w-auto p-2 font-medium bg-yellow-600">ID</th>
-                        <th class="sticky top-0 p-2 font-medium bg-yellow-600">Name</th>
-                        <th class="sticky top-0 p-2 font-medium bg-yellow-600">SRP</th>
-                        <th class="sticky top-0 p-2 font-medium bg-yellow-600">Unit</th>
-                        <th class="sticky top-0 p-2 font-medium bg-yellow-600">Action</th>
+                        <th class="sticky top-0 w-auto p-2 font-medium bg-red-600">ID</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600">Name</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600">SRP</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600">Unit</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600">Action</th>
                     </tr>
                 </thead>
                 <tbody>

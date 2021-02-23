@@ -25,7 +25,10 @@
 
 <body x-data x-init="window.print();" class="h-screen p-10 mx-auto text-gray-800">
     <div>
-        <h1 class="text-xl">ASEANA General Merchandise</h1>
+        <div class="flex items-center space-x-3">
+            <img src="{{ asset('img/logo.png') }}" class="w-12 h-12" alt="logo">
+            <h1 class="text-xl">ASEANA General Merchandise</h1>
+        </div>
         <br class="my-20">
         <h1>Customer: Guest</h1>
         <h1>Branch: NDTC Centrum II</h1>

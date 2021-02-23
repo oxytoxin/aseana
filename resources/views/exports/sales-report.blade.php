@@ -5,7 +5,9 @@
             <th class="sticky top-0 p-2 font-medium bg-yellow-600">Date</th>
             <th class="sticky top-0 p-2 font-medium bg-yellow-600">Products</th>
             <th class="sticky top-0 p-2 font-medium bg-yellow-600">Quantity</th>
-            <th class="sticky top-0 p-2 font-medium bg-yellow-600">Price</th>
+            <th class="sticky top-0 p-2 font-medium bg-yellow-600">SRP</th>
+            <th class="sticky top-0 p-2 font-medium bg-yellow-600">Sell Price</th>
+            <th class="sticky top-0 p-2 font-medium bg-yellow-600">Discount</th>
             <th class="sticky top-0 p-2 font-medium bg-yellow-600">Total Sales</th>
         </tr>
     </thead>
@@ -26,7 +28,17 @@
             </td>
             <td class="p-2 ">
                 @foreach ($transaction->products as $product)
+                <h1 class="text-sm">&#8369; {{ number_format($product->srp,2) }}</h1>
+                @endforeach
+            </td>
+            <td class="p-2 ">
+                @foreach ($transaction->products as $product)
                 <h1 class="text-sm">&#8369; {{ number_format($product->pivot->sell_price,2) }}</h1>
+                @endforeach
+            </td>
+            <td class="p-2 ">
+                @foreach ($transaction->products as $product)
+                <h1 class="text-sm">&#8369; {{ number_format($product->pivot->discount,2) }}</h1>
                 @endforeach
             </td>
             <td class="p-2 space-x-3">

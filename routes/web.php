@@ -66,3 +66,4 @@ Route::get('/products', ProductIndex::class)->name('products.index');
 Route::get('/inventory', InventoryIndex::class)->name('inventory.index');
 Route::get('/reports', ReportIndex::class)->name('reports.index');
 Route::get('/invoice/{transaction}', [PageController::class, 'invoice'])->name('print-invoice');
+Route::get('/print-report', [PageController::class, 'report'])->name('print-report');

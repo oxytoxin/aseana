@@ -3,7 +3,8 @@
         <i class="text-7xl icofont-spinner animate-spin"></i>
     </div>
     <div x-show.transition="payment" x-cloak class="fixed inset-0 z-30 grid bg-gray-300 bg-opacity-70 place-items-center">
-        <div @click.away="payment=false" class="flex flex-col items-center w-1/2 p-5 bg-white rounded-lg">
+        <div @click.away="payment=false" class="relative flex flex-col items-center w-1/2 p-5 bg-white rounded-lg">
+            <i class="absolute text-red-600 cursor-pointer icofont-ui-close right-6" @click="payment = false"></i>
             <h1 class="text-xl font-semibold uppercase">Payment</h1>
             <br>
             <h1>Amount Due:</h1>
@@ -28,8 +29,8 @@
         <div class="text-center">
             <input x-ref="productSearch" type="text" wire:model="query" autofocus placeholder="Search for products..." autocomplete="off" class="w-full rounded-md">
         </div>
-        <div id="products-container" class="mx-auto mt-2 overflow-y-auto bg-gray-300 divide-y-2 divide-gray-500 h-72">
-            <div class="sticky top-0 flex justify-between p-2 font-semibold text-center text-white bg-yellow-600">
+        <div id="products-container" class="mx-auto mt-2 overflow-y-auto bg-red-300 divide-y-2 divide-gray-500 h-72">
+            <div class="sticky top-0 flex justify-between p-2 font-semibold text-center text-white bg-red-600">
                 <div class="w-2/5">
                     <h1>Product</h1>
                 </div>
@@ -49,7 +50,7 @@
                     <h1>{{ $product->name }}</h1>
                 </div>
                 <div class="w-1/5">
-                    <h1 class="text-center">{{ $product->items_instock }}</h1>
+                    <h1 class="text-center">{{ $transaction->products->where('id',$product->id)->first() ? $product->items_instock - $transaction->products->where('id',$product->id)->first()->pivot->quantity :  $product->items_instock}}</h1>
                 </div>
                 <div class="w-1/5">
                     <h1 class="text-center">{{ $product->items_instock > 1 ? $product->unit->plural : $product->unit->name }}</h1>
@@ -73,7 +74,7 @@
             </div>
         </div>
     </div>
-    <div class="relative flex flex-col h-full p-2 bg-gray-300">
+    <div class="relative flex flex-col h-full p-2 bg-red-300">
         <i class="absolute text-xl text-red-600 cursor-pointer icofont-ui-close top-2 right-2" wire:click="discardTransaction"></i>
         <h1 class="text-xl font-semibold text-center uppercase">Current Sale</h1>
         <div class="flex flex-col justify-between flex-1">
@@ -81,12 +82,12 @@
                 <table class="w-full text-sm text-center border-2 border-collapse divide-y-2 table-auto">
                     <thead class="text-white">
                         <tr>
-                            <th class="sticky top-0 z-20 bg-gray-500">Product</th>
-                            <th class="sticky top-0 z-20 bg-gray-500">Price</th>
-                            <th class="sticky top-0 z-20 bg-gray-500">Sell Price</th>
-                            <th class="sticky top-0 z-20 bg-gray-500">Quantity</th>
-                            <th class="sticky top-0 z-20 bg-gray-500">Unit</th>
-                            <th class="sticky top-0 z-20 bg-gray-500">Sub-total</th>
+                            <th class="sticky top-0 z-20 bg-red-500">Product</th>
+                            <th class="sticky top-0 z-20 bg-red-500">Price</th>
+                            <th class="sticky top-0 z-20 bg-red-500">Sell Price</th>
+                            <th class="sticky top-0 z-20 bg-red-500">Quantity</th>
+                            <th class="sticky top-0 z-20 bg-red-500">Unit</th>
+                            <th class="sticky top-0 z-20 bg-red-500">Sub-total</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y-2">
@@ -120,7 +121,7 @@
                 <h1 class="font-medium text-center">{{ $selected_product->name }}</h1>
                 <div class="justify-around center">
                     <h1>Price: &#8369;{{ number_format($selected_product->srp,2) }}</h1>
-                    <h1>Stocks: {{ $selected_product->items_instock }} {{ $selected_product->items_instock > 1 ? $selected_product->unit->plural : $selected_product->unit->name }} remaining</h1>
+                    <h1>Stocks: {{ $selected_product->stock->quantity }} {{ $selected_product->stock->quantity > 1 ? $selected_product->unit->plural : $selected_product->unit->name }} remaining</h1>
                 </div>
                 <div class="justify-around center">
                     <h1 class="flex items-center"><span class="mr-1">Quantity: </span><input type="number" wire:model.lazy="selected_quantity" class="text-xs text-center"></h1>
@@ -131,7 +132,10 @@
                         <button wire:click="applyDiscount" class="text-white bg-gray-600 button ring-4 ring-gray-400">Apply Discount</button>
                         <input type="number" class="w-24" wire:model.lazy="discount"><span>%</span>
                     </div>
-                    <button @click="$nextTick(()=>{$refs.productSearch.focus();})" wire:click="addToSale" class="text-white bg-gray-600 button ring-4 ring-gray-400">Add to Sale</button>
+                    <div class="space-x-3">
+                        <button @click="$nextTick(()=>{$refs.productSearch.focus();})" wire:click="addToSale" class="text-white bg-gray-600 button ring-4 ring-gray-400">Add to Sale</button>
+                        <button @click="$nextTick(()=>{$refs.productSearch.focus();})" wire:click="cancelAddToSale" class="text-white bg-red-400 button ring-4 ring-red-300">Cancel</button>
+                    </div>
                 </div>
             </div>
             @else

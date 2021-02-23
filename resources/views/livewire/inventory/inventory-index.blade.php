@@ -1,6 +1,7 @@
 <div class="grid h-full grid-cols-12" x-data="{showWarning:@entangle('showWarning').defer,showRestock:@entangle('showRestock').defer}">
     <div x-cloak x-show.transition.opacity="showWarning" class="fixed inset-0 z-50 grid place-items-center">
-        <div @click.away="showWarning = false" class="w-1/4 p-5 text-center bg-white rounded">
+        <div @click.away="showWarning = false" class="relative w-1/4 p-5 text-center bg-white rounded">
+            <i class="absolute text-red-600 cursor-pointer icofont-ui-close right-6" @click="showWarning = false"></i>
             <form wire:submit.prevent="updateThreshold()">
                 <label class="text-sm font-semibold" for="warning">Warning quantity threshold for</label>
                 <label class="block" for="warning">{{ $product->name ?? '' }}</label>
@@ -17,7 +18,8 @@
         </div>
     </div>
     <div x-cloak x-show.transition.opacity="showRestock" class="fixed inset-0 z-50 grid place-items-center">
-        <div @click.away="showRestock = false" class="w-1/4 p-5 text-center bg-white rounded">
+        <div @click.away="showRestock = false" class="relative w-1/4 p-5 text-center bg-white rounded">
+            <i class="absolute text-red-600 cursor-pointer icofont-ui-close right-6" @click="showRestock = false"></i>
             <form wire:submit.prevent="updateStock()">
                 <label class="text-sm font-semibold" for="restock">ADD STOCKS FOR</label>
                 <label class="block" for="restock">{{ $product->name ?? '' }}</label>
@@ -33,16 +35,16 @@
             </form>
         </div>
     </div>
-    <div class="col-span-2 p-5 bg-gray-400">
+    <div class="col-span-2 p-5 bg-red-400">
         <div class="flex flex-col h-full">
             <ul class="flex flex-col flex-grow space-y-3 font-semibold uppercase">
-                <a class="p-2 duration-200 rounded {{ session('page') == 'products.index' ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white" href="{{ route('products.index') }}">
+                <a class="p-2 duration-200 rounded {{ session('page') == 'products.index' ? 'bg-red-700 text-white' : '' }} hover:bg-red-700 hover:text-white" href="{{ route('products.index') }}">
                     <li>Products</li>
                 </a>
-                <a class="p-2 duration-200 rounded {{ session('page') == 'inventory.index' ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white" href="{{ route('inventory.index') }}">
+                <a class="p-2 duration-200 rounded {{ session('page') == 'inventory.index' ? 'bg-red-700 text-white' : '' }} hover:bg-red-700 hover:text-white" href="{{ route('inventory.index') }}">
                     <li>Inventory</li>
                 </a>
-                <a class="p-2 duration-200 rounded {{ session('page') == 'reports.index' ? 'bg-gray-700 text-white' : '' }} hover:bg-gray-700 hover:text-white" href="{{ route('reports.index') }}">
+                <a class="p-2 duration-200 rounded {{ session('page') == 'reports.index' ? 'bg-red-700 text-white' : '' }} hover:bg-red-700 hover:text-white" href="{{ route('reports.index') }}">
                     <li>Reports</li>
                 </a>
             </ul>
@@ -52,21 +54,21 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-col col-span-10 bg-gray-300">
+    <div class="flex flex-col col-span-10 bg-red-200">
         <div class="flex justify-between px-5 py-2">
             <input wire:model="search" autofocus autocomplete="off" placeholder="Search for product..." class="w-1/2 rounded" type="text">
         </div>
         <div class="flex-grow w-full h-0 px-5 overflow-y-auto">
-            <table class="table w-full text-center table-auto">
+            <table class="table w-full text-sm text-center table-auto">
                 <thead class="text-white">
                     <tr>
-                        <th class="sticky top-0 w-auto p-2 font-medium bg-yellow-600">ID</th>
-                        <th class="sticky top-0 p-2 font-medium bg-yellow-600">Name</th>
-                        <th class="sticky top-0 p-2 font-medium bg-yellow-600">Stock</th>
-                        <th class="sticky top-0 p-2 font-medium bg-yellow-600">Unit</th>
-                        <th class="sticky top-0 p-2 font-medium bg-yellow-600">Last Restocked at</th>
-                        <th class="sticky top-0 p-2 font-medium bg-yellow-600">Threshold</th>
-                        <th class="sticky top-0 p-2 font-medium bg-yellow-600">Action</th>
+                        <th class="sticky top-0 w-auto p-2 font-medium bg-red-600">ID</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600">Name</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600">Stock</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600">Unit</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600">Last Restocked at</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600">Threshold</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -79,8 +81,8 @@
                                     @endif</span>{{ $product->stock->quantity }}</td>
                         <td class="p-2 ">{{ $product->unit->name }}</td>
                         <td class="p-2 ">
-                            <h1 class="text-sm italic">{{ $product->stock->last_restocked_date }}</h1>
-                            <h1 class="text-xs">{{ $product->stock->last_restocked_time }}</h1>
+                            <h1 class="text-sm italic">{{ $product->last_restock->format('M d, Y') }}</h1>
+                            <h1 class="text-xs">{{ $product->last_restock->format('g:i a') }}</h1>
                         </td>
                         <td class="space-x-3">
                             <span>{{ $product->stock->warning }}</span>

@@ -4,19 +4,19 @@
         <h1 class="text-6xl font-semibold">ASEANA General Merchandise</h1>
     </div>
     <div class="flex items-center justify-center mx-auto space-x-5">
-        <x-link text="Point of Sales" class="bg-green-400" href="{{ route('pos.index') }}" />
-        <x-link text="Products" class="bg-green-400" href="{{ route('products.index') }}" />
-        <x-link text="Inventory" class="bg-green-400" href="{{ route('inventory.index') }}" />
-        <x-link text="Reports" class="bg-green-400" href="{{ route('reports.index') }}" />
+        <x-link text="Point of Sales" class="bg-red-400" href="{{ route('pos.index') }}" />
+        <x-link text="Products" class="bg-red-400" href="{{ route('products.index') }}" />
+        <x-link text="Inventory" class="bg-red-400" href="{{ route('inventory.index') }}" />
+        <x-link text="Reports" class="bg-red-400" href="{{ route('reports.index') }}" />
     </div>
     <hr class="my-4 border-t-4 border-gray-900">
-    <div class="flex">
-        <div class="w-1/2 p-5 bg-gray-200 h-96">
+    <div class="flex text-sm">
+        <div class="w-1/2 p-5 bg-red-300 h-96">
             <h1 class="text-2xl font-semibold text-center">POPULAR PRODUCTS</h1>
-            <div class="w-3/4 mx-auto my-4 space-y-3">
+            <div class="mx-auto my-4 space-y-3">
                 @forelse ($popular as $pop_name => $pop)
                 <div class="flex justify-between">
-                    <h1 class="space-x-2"><span>&#x1F947;</span><span>{{ $pop_name }}</span></h1>
+                    <h1 class="w-1/2 space-x-2"><span>&#x1F947;</span><span>{{ $pop_name }}</span></h1>
                     <h1>{{ $pop['quantity'] }} sold</h1>
                 </div>
                 @empty
@@ -25,12 +25,12 @@
 
             </div>
         </div>
-        <div class="flex flex-col w-1/2 p-5 bg-gray-300 h-96">
+        <div class="flex flex-col w-1/2 p-5 bg-red-200 h-96">
             <h1 class="text-2xl font-semibold text-center">STOCKS WATCH</h1>
             <div class="flex flex-col flex-grow px-5 my-4 space-y-3 overflow-y-auto">
                 @forelse ($warning as $warn)
                 <div class="flex justify-between">
-                    <h1 class="space-x-2"><i class="{{ $warn->stock->quantity === 0 ? 'text-red-600' : 'text-yellow-400' }} icofont-warning"></i><span>{{ $warn->name }}</span></h1>
+                    <h1 class="w-3/4 space-x-2"><i class="{{ $warn->stock->quantity === 0 ? 'text-red-600' : 'text-yellow-400' }} icofont-warning"></i><span>{{ $warn->name }}</span></h1>
                     <h1>{{ $warn->stock->quantity }} remaining</h1>
                 </div>
                 @empty

@@ -22,7 +22,12 @@ class ReportIndex extends Component
 
     public function render()
     {
-        $this->transactions = Transaction::with('products')->where('is_final', true)->whereBetween('updated_at', [Carbon::parse($this->date_from), Carbon::parse($this->date_to)->addDay()])->get();
+        try {
+            $date_from = Carbon::parse($this->date_from);
+            $date_to = Carbon::parse($this->date_to)->addDay();
+            $this->transactions = Transaction::with('products')->where('is_final', true)->whereBetween('updated_at', [$date_from, $date_to])->get();
+        } catch (\Throwable $th) {
+        }
         return view('livewire.reports.report-index')
             ->extends('layouts.master')
             ->section('content');
@@ -30,5 +35,15 @@ class ReportIndex extends Component
     public function export()
     {
         return Excel::download(new SalesExport($this->transactions), "sales_report_$this->date_from-$this->date_to.xlsx");
+    }
+
+    public function printReport()
+    {
+        try {
+            $date_from = Carbon::parse($this->date_from);
+            $date_to = Carbon::parse($this->date_to)->addDay();
+            return redirect()->route('print-report', ['date_from' => $this->date_from, 'date_to' => $this->date_to]);
+        } catch (\Throwable $th) {
+        }
     }
 }
