@@ -63,24 +63,24 @@
             <button @click="createModal = true; $nextTick(()=>{$refs.product_name.focus();});" class="px-3 py-2 bg-green-400 rounded hover:bg-opacity-50">ADD PRODUCT</button>
         </div>
         <div class="flex-grow w-full h-0 px-5 overflow-y-auto">
-            <table class="table w-full text-sm text-center table-auto">
+            <table class="table w-full text-sm text-center bg-white border border-gray-900 table-auto">
                 <thead class="text-white">
                     <tr>
-                        <th class="sticky top-0 w-auto p-2 font-medium bg-red-600">ID</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Name</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">SRP</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Unit</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Action</th>
+                        <th class="sticky top-0 w-auto p-2 font-medium bg-red-600 border border-gray-900">ID</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Name</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">SRP</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Unit</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($products as $product)
                     <tr>
-                        <td class="p-2 ">{{ $product->id }}</td>
-                        <td class="p-2 text-left">{{ $product->name }}</td>
-                        <td class="p-2">&#8369; {{ number_format($product->srp,2) }}</td>
-                        <td class="p-2 ">{{ $product->unit->name }}</td>
-                        <td class="p-2 space-x-3">
+                        <td class="p-2 border border-gray-900 ">{{ $product->id }}</td>
+                        <td class="p-2 text-left border border-gray-900">{{ $product->name }}</td>
+                        <td class="p-2 border border-gray-900">&#8369; {{ number_format($product->srp,2) }}</td>
+                        <td class="p-2 border border-gray-900 ">{{ $product->unit->name }}</td>
+                        <td class="p-2 space-x-3 border border-gray-900">
                             <button wire:click="showEdit({{ $product->id }})" class="px-3 py-1 bg-green-400 rounded ring-2">
                                 <i class="icofont-ui-edit"></i>
                             </button>

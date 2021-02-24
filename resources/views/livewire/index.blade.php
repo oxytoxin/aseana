@@ -1,7 +1,7 @@
 <div class="w-3/4 p-5 mx-auto bg-white">
     <div class="flex flex-col items-center justify-center my-16 space-y-10 h-60">
         <h1 class="text-2xl">WELCOME TO</h1>
-        <h1 class="text-6xl font-semibold">ASEANA General Merchandise</h1>
+        <h1 class="text-5xl font-semibold">ASEANA General Merchandise</h1>
     </div>
     <div class="flex items-center justify-center mx-auto space-x-5">
         <x-link text="Point of Sales" class="bg-red-400" href="{{ route('pos.index') }}" />

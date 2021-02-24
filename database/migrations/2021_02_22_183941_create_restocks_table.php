@@ -15,7 +15,7 @@ class CreateRestocksTable extends Migration
     {
         Schema::create('restocks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained();
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->integer('quantity');
             $table->timestamps();
         });

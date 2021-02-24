@@ -69,6 +69,9 @@ class ProductIndex extends Component
                 $p->stock()->create([
                     'restocked_at' => Carbon::now(),
                 ]);
+                $p->restocks()->create([
+                    'quantity' => 0,
+                ]);
             });
         }
         if ($this->editing) {

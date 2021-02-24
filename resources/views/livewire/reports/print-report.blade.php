@@ -88,8 +88,8 @@
                 </tr>
                 @endforelse
                 <tr>
-                    <td colspan="4" class="p-2 text-center border">Grand Total Sales</td>
-                    <td colspan="4" class="p-2 text-center border">&#8369; {{ number_format($transactions->sum('total_sales'),2) }}</td>
+                    <td colspan="7" class="p-2 text-center border">Grand Total Sales</td>
+                    <td colspan="1" class="p-2 text-center border">&#8369; {{ number_format($transactions->sum('total_sales'),2) }}</td>
                 </tr>
             </tbody>
         </table>

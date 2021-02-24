@@ -59,38 +59,38 @@
             <input wire:model="search" autofocus autocomplete="off" placeholder="Search for product..." class="w-1/2 rounded" type="text">
         </div>
         <div class="flex-grow w-full h-0 px-5 overflow-y-auto">
-            <table class="table w-full text-sm text-center table-auto">
+            <table class="table w-full text-sm text-center border border-gray-900 table-auto">
                 <thead class="text-white">
                     <tr>
-                        <th class="sticky top-0 w-auto p-2 font-medium bg-red-600">ID</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Name</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Stock</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Unit</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Last Restocked at</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Threshold</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Action</th>
+                        <th class="sticky top-0 w-auto p-2 font-medium bg-red-600 border border-gray-900">ID</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Name</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Stock</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Unit</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Last Restocked at</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Threshold</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Action</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white">
                     @foreach ($products as $product)
                     <tr wire:key="product-{{ $product->id }}">
-                        <td class="p-2 ">{{ $product->id }}</td>
-                        <td class="p-2 text-left">{{ $product->name }}</td>
-                        <td class="p-2 "><span>@if ($product->stock->quantity < $product->stock->warning)
+                        <td class="p-2 border border-gray-900 ">{{ $product->id }}</td>
+                        <td class="p-2 text-left border border-gray-900">{{ $product->name }}</td>
+                        <td class="p-2 border border-gray-900 "><span>@if ($product->stock->quantity < $product->stock->warning)
                                     <i class="text-lg text-red-600 icofont-warning"></i>
                                     @endif</span>{{ $product->stock->quantity }}</td>
-                        <td class="p-2 ">{{ $product->unit->name }}</td>
-                        <td class="p-2 ">
+                        <td class="p-2 border border-gray-900 ">{{ $product->unit->name }}</td>
+                        <td class="p-2 border border-gray-900 ">
                             <h1 class="text-sm italic">{{ $product->last_restock->format('M d, Y') }}</h1>
                             <h1 class="text-xs">{{ $product->last_restock->format('g:i a') }}</h1>
                         </td>
-                        <td class="space-x-3">
+                        <td class="space-x-3 border border-gray-900">
                             <span>{{ $product->stock->warning }}</span>
                             <button @click="$nextTick(()=>{$refs.warningInput.focus();});" wire:click="showWarning({{ $product->id }})" class="px-3 py-1 text-white bg-green-400 rounded hover:text-gray-700 ring-2">
                                 <i class="icofont-ui-edit"></i>
                             </button>
                         </td>
-                        <td class="p-2 space-x-3">
+                        <td class="p-2 space-x-3 border border-gray-900">
                             <button @click="$nextTick(()=>{$refs.restockInput.focus();});" wire:click="showRestock({{ $product->id }})" class="px-3 py-1 text-white bg-green-400 rounded hover:text-gray-700 ring-2">
                                 <i class="icofont-cubes"></i>
                                 <span>RESTOCK</span>

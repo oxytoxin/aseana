@@ -37,7 +37,7 @@
                 </div>
             </a>
         </header>
-        <main class="row-span-7">
+        <main class="my-2 row-span-7">
             @yield('content')
         </main>
     </div>

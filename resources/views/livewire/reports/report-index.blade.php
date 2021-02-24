@@ -35,50 +35,50 @@
             </button>
         </div>
         <div class="flex-grow w-full h-0 px-5 overflow-y-auto">
-            <table class="table w-full text-sm text-center table-auto">
+            <table class="table w-full text-sm text-center border border-gray-900 table-auto">
                 <thead class="text-white">
                     <tr>
-                        <th class="sticky top-0 w-auto p-2 font-medium bg-red-600">Transaction Code</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Date</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Products</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Quantity</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">SRP</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Sell Price</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Discount</th>
-                        <th class="sticky top-0 p-2 font-medium bg-red-600">Total Sales</th>
+                        <th class="sticky top-0 w-auto p-2 font-medium bg-red-600 border border-gray-900">Transaction Code</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Date</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Products</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Quantity</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">SRP</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Sell Price</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Discount</th>
+                        <th class="sticky top-0 p-2 font-medium bg-red-600 border border-gray-900">Total Sales</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white">
                     @forelse ($transactions as $transaction)
                     <tr>
-                        <td class="p-2">{{ $transaction->code }}</td>
-                        <td class="p-2">{{ $transaction->date_for_humans }}</td>
-                        <td class="p-2 w-96">
+                        <td class="p-2 border border-gray-900">{{ $transaction->code }}</td>
+                        <td class="p-2 border border-gray-900">{{ $transaction->date_for_humans }}</td>
+                        <td class="p-2 border border-gray-900">
                             @foreach ($transaction->products as $product)
                             <h1 class="text-sm">{{ $product->name }}</h1>
                             @endforeach
                         </td>
-                        <td class="p-2 ">
+                        <td class="p-2 border border-gray-900 ">
                             @foreach ($transaction->products as $product)
                             <h1>{{$product->pivot->quantity }}</h1>
                             @endforeach
                         </td>
-                        <td class="p-2 ">
+                        <td class="p-2 border border-gray-900 ">
                             @foreach ($transaction->products as $product)
                             <h1 class="text-sm">&#8369; {{ number_format($product->srp,2) }}</h1>
                             @endforeach
                         </td>
-                        <td class="p-2 ">
+                        <td class="p-2 border border-gray-900 ">
                             @foreach ($transaction->products as $product)
                             <h1 class="text-sm">&#8369; {{ number_format($product->pivot->sell_price,2) }}</h1>
                             @endforeach
                         </td>
-                        <td class="p-2 ">
+                        <td class="p-2 border border-gray-900 ">
                             @foreach ($transaction->products as $product)
                             <h1 class="text-sm">&#8369; {{ number_format($product->pivot->discount,2) }}</h1>
                             @endforeach
                         </td>
-                        <td class="p-2 space-x-3">
+                        <td class="p-2 space-x-3 border border-gray-900">
                             <h1 class="text-sm">&#8369; {{ number_format($transaction->total_sales,2) }}</h1>
                         </td>
                     </tr>
@@ -89,8 +89,8 @@
                     </tr>
                     @endforelse
                     <tr>
-                        <td colspan="4" class="p-2 text-center border border-gray-900">Grand Total Sales</td>
-                        <td colspan="4" class="p-2 text-center border border-gray-900">&#8369; {{ number_format($transactions->sum('total_sales'),2) }}</td>
+                        <td colspan="7" class="p-2 text-center border border-gray-900">Grand Total Sales</td>
+                        <td colspan="1" class="p-2 text-center border border-gray-900">&#8369; {{ number_format($transactions->sum('total_sales'),2) }}</td>
                     </tr>
                 </tbody>
             </table>
